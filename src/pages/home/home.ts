@@ -7,6 +7,8 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  private deleteDisabled: boolean = true;
+
   constructor(public navCtrl: NavController) {
 
   }

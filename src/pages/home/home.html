@@ -93,10 +93,10 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        add mask
+        <button ion-button>add mask</button>
       </ion-col>
       <ion-col>
-        delete
+        <button ion-button color="danger" [disabled]="deleteDisabled">delete</button>
       </ion-col>
     </ion-row>
   </ion-grid>
