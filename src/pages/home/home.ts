@@ -8,6 +8,7 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   private deleteDisabled: boolean = true;
+  private remaining: number = 86;
 
   constructor(public navCtrl: NavController) {
 
