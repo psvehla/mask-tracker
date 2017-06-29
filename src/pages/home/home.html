@@ -9,8 +9,8 @@
 <ion-content padding>
   <div margin-bottom>
     <ion-item>
-      <ion-select>
-        <ion-option selected>Mask 1</ion-option>
+      <ion-select [(ngModel)]="currentMask" [placeholder]="currentMask.name">
+        <ion-option *ngFor="let mask of masks" [value]="mask">{{mask.name}}</ion-option>
       </ion-select>
     </ion-item>
   </div>
