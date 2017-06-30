@@ -9,7 +9,7 @@
 <ion-content padding>
   <div margin-bottom>
     <ion-item>
-      <ion-select [(ngModel)]="currentMask" [placeholder]="currentMask.name">
+      <ion-select [(ngModel)]="currentMask" interface="popover" [placeholder]="currentMask.name">
         <ion-option *ngFor="let mask of masks" [value]="mask">{{mask.name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -23,7 +23,7 @@
         <button ion-button large>+</button>
       </ion-col>
       <ion-col align-self-center>
-        <h3 style="color:yellow">0</h3>
+        <h3 style="color:yellow">{{currentMask.yellow}}</h3>
       </ion-col>
       <ion-col align-self-center col-auto>
         <button ion-button small>-</button>
@@ -37,7 +37,7 @@
         <button ion-button large>+</button>
       </ion-col>
       <ion-col align-self-center>
-        <h3 style="color:orange">0</h3>
+        <h3 style="color:orange">{{currentMask.orange}}</h3>
       </ion-col>
       <ion-col align-self-center col-auto>
         <button ion-button small>-</button>
@@ -51,7 +51,7 @@
         <button ion-button large>+</button>
       </ion-col>
       <ion-col align-self-center>
-        <h3 style="color:red">0</h3>
+        <h3 style="color:red">{{currentMask.red}}</h3>
       </ion-col>
       <ion-col align-self-center col-auto>
         <button ion-button small>-</button>
@@ -65,7 +65,7 @@
         <button ion-button large>+</button>
       </ion-col>
       <ion-col align-self-center>
-        <h3 style="color:purple">0</h3>
+        <h3 style="color:purple">{{currentMask.purple}}</h3>
       </ion-col>
       <ion-col align-self-center col-auto>
         <button ion-button small>-</button>
@@ -79,7 +79,7 @@
         <button ion-button large>+</button>
       </ion-col>
       <ion-col align-self-center>
-        <h3 style="color:brown">0</h3>
+        <h3 style="color:brown">{{currentMask.brown}}</h3>
       </ion-col>
       <ion-col align-self-center col-auto>
         <button ion-button small>-</button>
