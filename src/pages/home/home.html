@@ -20,7 +20,7 @@
         <h2 style="color:yellow">51-100</h2>
       </ion-col>
       <ion-col align-self-center>
-        <button ion-button large>+</button>
+        <button ion-button large (click)="incrementYellow()">+</button>
       </ion-col>
       <ion-col align-self-center>
         <h3 style="color:yellow">{{currentMask.yellow}}</h3>
@@ -34,7 +34,7 @@
         <h2 style="color:orange">101-150</h2>
       </ion-col>
       <ion-col align-self-center>
-        <button ion-button large>+</button>
+        <button ion-button large (click)="incrementOrange()">+</button>
       </ion-col>
       <ion-col align-self-center>
         <h3 style="color:orange">{{currentMask.orange}}</h3>
@@ -48,7 +48,7 @@
         <h2 style="color:red">151-200</h2>
       </ion-col>
       <ion-col align-self-center>
-        <button ion-button large>+</button>
+        <button ion-button large (click)="incrementRed()">+</button>
       </ion-col>
       <ion-col align-self-center>
         <h3 style="color:red">{{currentMask.red}}</h3>
@@ -62,7 +62,7 @@
         <h2 style="color:purple">201-300</h2>
       </ion-col>
       <ion-col align-self-center>
-        <button ion-button large>+</button>
+        <button ion-button large (click)="incrementPurple()">+</button>
       </ion-col>
       <ion-col align-self-center>
         <h3 style="color:purple">{{currentMask.purple}}</h3>
@@ -76,7 +76,7 @@
         <h2 style="color:brown">300+</h2>
       </ion-col>
       <ion-col align-self-center>
-        <button ion-button large>+</button>
+        <button ion-button large (click)="incrementBrown()">+</button>
       </ion-col>
       <ion-col align-self-center>
         <h3 style="color:brown">{{currentMask.brown}}</h3>

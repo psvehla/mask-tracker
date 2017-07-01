@@ -22,4 +22,24 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
   }
+
+  private incrementYellow(): void {
+    this.currentMask.yellow++;
+  }
+
+  private incrementOrange(): void {
+    this.currentMask.orange++;
+  }
+
+  private incrementRed(): void {
+    this.currentMask.red++;
+  }
+
+  private incrementPurple(): void {
+    this.currentMask.purple++;
+  }
+
+  private incrementBrown(): void {
+    this.currentMask.brown++;
+  }
 }
