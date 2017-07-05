@@ -27,19 +27,49 @@ export class HomePage {
     this.currentMask.yellow++;
   }
 
+  private decrementYellow(): void {
+    if (this.currentMask.yellow > 0) {
+      this.currentMask.yellow--;
+    }
+  }
+
   private incrementOrange(): void {
     this.currentMask.orange++;
+  }
+
+  private decrementOrange(): void {
+    if (this.currentMask.orange > 0) {
+      this.currentMask.orange--;
+    }
   }
 
   private incrementRed(): void {
     this.currentMask.red++;
   }
 
+  private decrementRed(): void {
+    if (this.currentMask.red > 0) {
+      this.currentMask.red--;
+    }
+  }
+
   private incrementPurple(): void {
     this.currentMask.purple++;
   }
 
+  private decrementPurple(): void {
+    if (this.currentMask.purple > 0) {
+      this.currentMask.purple--;
+    }
+  }
+
   private incrementBrown(): void {
     this.currentMask.brown++;
+  }
+
+  private decrementBrown(): void {
+    if (this.currentMask.brown > 0) {
+      this.currentMask.brown--;
+    }
   }
 }
