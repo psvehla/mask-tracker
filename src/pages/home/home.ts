@@ -3,71 +3,69 @@ import { NavController }  from 'ionic-angular';
 
 import { Mask } from '../../app/mask';
 
+import { MaskProvider } from '../../providers/mask/mask';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  private deleteDisabled: boolean = true;
+  deleteDisabled: boolean = true;
 
-  private masks: Mask[] = [
-    {name: "mask 1", yellow: 1, orange: 2, red: 3, purple: 4, brown: 5},
-    {name: "mask 2", yellow: 6, orange: 7, red: 8, purple: 9, brown: 10},
-    {name: "mask 3", yellow: 11, orange: 12, red: 13, purple: 14, brown: 15}
-  ];
-
+  private masks: Mask[] = this.maskService.getMasks();
   private currentMask: Mask = this.masks[0];
-  private remaining: number = 86;
 
-  constructor(public navCtrl: NavController) {
+  remaining: number = this.maskService.calculateRemaining(this.currentMask);
+
+  constructor(public navCtrl: NavController, public maskService: MaskProvider) {
   }
 
-  private incrementYellow(): void {
+  incrementYellow(): void {
     this.currentMask.yellow++;
   }
 
-  private decrementYellow(): void {
+  decrementYellow(): void {
     if (this.currentMask.yellow > 0) {
       this.currentMask.yellow--;
     }
   }
 
-  private incrementOrange(): void {
+  incrementOrange(): void {
     this.currentMask.orange++;
   }
 
-  private decrementOrange(): void {
+  decrementOrange(): void {
     if (this.currentMask.orange > 0) {
       this.currentMask.orange--;
     }
   }
 
-  private incrementRed(): void {
+  incrementRed(): void {
     this.currentMask.red++;
   }
 
-  private decrementRed(): void {
+  decrementRed(): void {
     if (this.currentMask.red > 0) {
       this.currentMask.red--;
     }
   }
 
-  private incrementPurple(): void {
+  incrementPurple(): void {
     this.currentMask.purple++;
   }
 
-  private decrementPurple(): void {
+  decrementPurple(): void {
     if (this.currentMask.purple > 0) {
       this.currentMask.purple--;
     }
   }
 
-  private incrementBrown(): void {
+  incrementBrown(): void {
     this.currentMask.brown++;
   }
 
-  private decrementBrown(): void {
+  decrementBrown(): void {
     if (this.currentMask.brown > 0) {
       this.currentMask.brown--;
     }
