@@ -27,6 +27,6 @@ export class MaskProvider {
   }
 
   calculateRemaining(mask: Mask): number {
-    return 85;
+    return Math.round(100 - (mask.yellow / 410 + mask.orange / 370 + mask.red / 210 + mask.purple / 160 + mask.brown / 80) * 100);
   }
 }
