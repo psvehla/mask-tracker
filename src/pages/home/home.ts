@@ -23,65 +23,65 @@ export class HomePage {
 
   incrementYellow(): void {
     this.currentMask.yellow++;
-    this.pushChanges();
+    this.update();
   }
 
   decrementYellow(): void {
     if (this.currentMask.yellow > 0) {
       this.currentMask.yellow--;
-      this.pushChanges();
+      this.update();
     }
   }
 
   incrementOrange(): void {
     this.currentMask.orange++;
-    this.pushChanges();
+    this.update();
   }
 
   decrementOrange(): void {
     if (this.currentMask.orange > 0) {
       this.currentMask.orange--;
-      this.pushChanges();
+      this.update();
     }
   }
 
   incrementRed(): void {
     this.currentMask.red++;
-    this.pushChanges();
+    this.update();
   }
 
   decrementRed(): void {
     if (this.currentMask.red > 0) {
       this.currentMask.red--;
-      this.pushChanges();
+      this.update();
     }
   }
 
   incrementPurple(): void {
     this.currentMask.purple++;
-    this.pushChanges();
+    this.update();
   }
 
   decrementPurple(): void {
     if (this.currentMask.purple > 0) {
       this.currentMask.purple--;
-      this.pushChanges();
+      this.update();
     }
   }
 
   incrementBrown(): void {
     this.currentMask.brown++;
-    this.pushChanges();
+    this.update();
   }
 
   decrementBrown(): void {
     if (this.currentMask.brown > 0) {
       this.currentMask.brown--;
-      this.pushChanges();
+      this.update();
     }
   }
 
-  private pushChanges(): void {
+  private update(): void {
     this.remaining = this.maskService.calculateRemaining(this.currentMask);
   }
 }
