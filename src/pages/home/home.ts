@@ -1,5 +1,5 @@
-import { Component }      from '@angular/core';
-import { NavController }  from 'ionic-angular';
+import { Component }                      from '@angular/core';
+import { NavController, AlertController } from 'ionic-angular';
 
 import { Mask } from '../../app/mask';
 
@@ -18,7 +18,10 @@ export class HomePage {
 
   remaining: number = this.maskService.calculateRemaining(this.currentMask);
 
-  constructor(public navCtrl: NavController, public maskService: MaskProvider) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider) {
+    if (this.masks.length > 1) {
+      this.deleteDisabled = false;
+    }
   }
 
   incrementYellow(): void {
@@ -81,7 +84,37 @@ export class HomePage {
     }
   }
 
+  deleteMask(): void {
+    let alert = this.alertCtrl.create({
+      title: "Delete Mask",
+      message: "Are you sure you want to delete the mask '" + this.currentMask.name + "'?",
+      buttons: [
+        {
+          text: 'cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'ok',
+          handler: () => {
+            console.log('ok clicked');
+            this.masks.splice(this.masks.indexOf(this.currentMask), 1);
+            this.currentMask = this.masks[0];
+            this.update();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   private update(): void {
     this.remaining = this.maskService.calculateRemaining(this.currentMask);
+
+    if (this.masks.length > 1) {
+      this.deleteDisabled = false;
+    }
+    else {
+      this.deleteDisabled = true;
+    }
   }
 }

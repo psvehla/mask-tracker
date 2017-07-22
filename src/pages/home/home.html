@@ -95,7 +95,7 @@
         <button ion-button>add mask</button>
       </ion-col>
       <ion-col>
-        <button ion-button color="danger" [disabled]="deleteDisabled">delete</button>
+        <button ion-button color="danger" [disabled]="deleteDisabled" (click)="deleteMask()">delete</button>
       </ion-col>
     </ion-row>
   </ion-grid>
