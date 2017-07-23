@@ -84,6 +84,34 @@ export class HomePage {
     }
   }
 
+  addMask(): void {
+    let alert = this.alertCtrl.create({
+      title: "Add Mask",
+      inputs: [{
+        name: 'name',
+        placeholder: 'another mask'
+      }],
+      buttons: [
+        {
+          text: 'cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'add',
+          handler: data => {
+            console.log('add a mask ' + data.name);
+            let newMask: Mask = new Mask();
+            newMask.name = data.name;
+            this.masks.push(newMask);
+            this.currentMask = newMask;
+            this.update();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
   deleteMask(): void {
     let alert = this.alertCtrl.create({
       title: "Delete Mask",
