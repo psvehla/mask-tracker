@@ -84,6 +84,10 @@ export class HomePage {
     }
   }
 
+  getRemainingColour(): string {
+    return this.remaining > 0 ? "black" : "red";
+  }
+
   addMask(): void {
     let alert = this.alertCtrl.create({
       title: "Add Mask",
