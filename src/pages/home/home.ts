@@ -103,7 +103,6 @@ export class HomePage {
         {
           text: 'add',
           handler: data => {
-            console.log('add a mask ' + data.name);
             let newMask: Mask = new Mask();
             newMask.name = data.name;
             this.masks.push(newMask);
@@ -128,7 +127,6 @@ export class HomePage {
         {
           text: 'ok',
           handler: () => {
-            console.log('ok clicked');
             this.masks.splice(this.masks.indexOf(this.currentMask), 1);
             this.currentMask = this.masks[0];
             this.update();
@@ -148,5 +146,7 @@ export class HomePage {
     else {
       this.deleteDisabled = true;
     }
+
+    this.maskService.saveMasks(this.masks);
   }
 }
