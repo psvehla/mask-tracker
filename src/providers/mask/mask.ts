@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { File }       from '@ionic-native/file';
+import { Platform }   from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 
@@ -22,15 +23,21 @@ export class MaskProvider {
 
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks";
 
-  constructor(private file: File) { }
+  constructor(public platform: Platform, private file: File) { }
 
   getMasks(): Mask[] {
-    this.file.readAsText(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks));
+    console.log('getMasks() called');
+
+    this.platform.ready().then(
+      () => this.file.readAsText(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
+    );
+
     return this.masks;
   }
 
   saveMasks(masks: Mask[]): void {
-    this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), true).catch(err => console.log());
+    console.log('saveMasks() called');
+    this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), true).catch(err => console.log()));
   }
 
   calculateRemaining(mask: Mask): number {
