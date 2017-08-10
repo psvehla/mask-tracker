@@ -30,8 +30,7 @@ export class MaskProvider {
     this.logger.log('getMasks() called');
 
     this.platform.ready().then(
-      // () => this.file.readAsText(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
-      () => this.file.readAsText(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.logger.log(err))
+      () => this.file.readAsText(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
     );
 
     return this.masks;
