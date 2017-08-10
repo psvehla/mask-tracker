@@ -99,4 +99,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div *ngFor="let logMessage of this.logger.messages">{{logMessage}}</div>
 </ion-content>

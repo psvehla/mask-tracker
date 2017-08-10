@@ -8,6 +8,7 @@ import { File }                                     from '@ionic-native/file';
 import { MyApp }        from './app.component';
 import { HomePage }     from '../pages/home/home';
 import { MaskProvider } from '../providers/mask/mask';
+import { LoggerProvider } from '../providers/logger/logger';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MaskProvider } from '../providers/mask/mask';
     SplashScreen,
     File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MaskProvider
+    MaskProvider,
+    LoggerProvider
   ]
 })
 export class AppModule {}

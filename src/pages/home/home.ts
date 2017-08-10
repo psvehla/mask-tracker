@@ -3,7 +3,8 @@ import { NavController, AlertController } from 'ionic-angular';
 
 import { Mask } from '../../app/mask';
 
-import { MaskProvider } from '../../providers/mask/mask';
+import { MaskProvider }   from '../../providers/mask/mask';
+import { LoggerProvider } from '../../providers/logger/logger';
 
 @Component({
   selector: 'page-home',
@@ -18,7 +19,7 @@ export class HomePage {
 
   remaining: number = this.maskService.calculateRemaining(this.currentMask);
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider, public logger: LoggerProvider) {
     if (this.masks.length > 1) {
       this.deleteDisabled = false;
     }
