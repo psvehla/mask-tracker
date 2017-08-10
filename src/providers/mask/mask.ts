@@ -30,7 +30,7 @@ export class MaskProvider {
     this.logger.log('getMasks() called');
 
     this.platform.ready().then(
-      () => this.file.readAsText(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
+      () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
     );
 
     return this.masks;
@@ -47,13 +47,13 @@ export class MaskProvider {
 
     this.logger.log('yy');
 
-    let dd: string = this.file.dataDirectory.toString();
+    let dd: string = this.file.externalDataDirectory.toString();
     this.logger.log('x');
-    this.logger.log(this.file.dataDirectory);
+    this.logger.log(this.file.externalDataDirectory);
     this.logger.log('xx');
     this.logger.log(typeof dd);
 //    this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err)));
-    this.file.writeFile(this.file.dataDirectory, "string", "string").catch(err => this.logger.log(err));
+    this.file.writeFile(this.file.externalDataDirectory, "string", "string").catch(err => this.logger.log(err));
   }
 
   calculateRemaining(mask: Mask): number {
