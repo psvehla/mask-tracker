@@ -41,7 +41,7 @@ export class MaskProvider {
     if (this.file.externalDataDirectory) {
       this.logger.log(this.file.externalDataDirectory);
       // this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err)));
-      this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, "string").catch(err => this.logger.log(err));
+      this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks)).catch(err => this.logger.log(err));
     }
     else {
       this.logger.log("can't access storage, create an alert here")
