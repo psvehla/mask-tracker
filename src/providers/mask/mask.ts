@@ -27,8 +27,6 @@ export class MaskProvider {
   constructor(public platform: Platform, private file: File, private logger: LoggerProvider) { }
 
   getMasks(): Mask[] {
-    this.logger.log('getMasks() called');
-
     this.platform.ready().then(
       () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
     );
@@ -42,18 +40,18 @@ export class MaskProvider {
 
     this.logger.log('y');
 
-    let s = new Date().getTime() + 5000;
-    while (new Date().getTime() < s) { };
-
-    this.logger.log('yy');
-
-    let dd: string = this.file.externalDataDirectory.toString();
-    this.logger.log('x');
-    this.logger.log(this.file.externalDataDirectory);
-    this.logger.log('xx');
-    this.logger.log(typeof dd);
-//    this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err)));
-    this.file.writeFile(this.file.externalDataDirectory, "string", "string").catch(err => this.logger.log(err));
+    if (this.file.externalDataDirectory) {
+      let dd: string = this.file.externalDataDirectory.toString();
+      this.logger.log('x');
+      this.logger.log(this.file.externalDataDirectory);
+      this.logger.log('xx');
+      this.logger.log(typeof dd);
+  //    this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err)));
+      this.file.writeFile(this.file.externalDataDirectory, "string", "string").catch(err => this.logger.log(err));
+    }
+    else {
+      this.logger.log("can't access storage, create an alert here")
+    }
   }
 
   calculateRemaining(mask: Mask): number {
