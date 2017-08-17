@@ -36,12 +36,11 @@ export class MaskProvider {
 
   saveMasks(masks: Mask[]): void {
     this.logger.log('saveMasks() called');
-    this.logger.log(JSON.stringify(masks));
 
     if (this.file.externalDataDirectory) {
       this.logger.log(this.file.externalDataDirectory);
       // this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err)));
-      this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks)).catch(err => this.logger.log(err));
+      this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), true).catch(err => this.logger.log(err));
     }
     else {
       this.logger.log("can't access storage, create an alert here")
