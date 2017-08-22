@@ -31,9 +31,6 @@ export class MaskProvider {
       () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
     );
 
-    let s = new Date().getTime() + 5000;
-    while (new Date().getTime() < s) { };
-    
     return this.masks;
   }
 
