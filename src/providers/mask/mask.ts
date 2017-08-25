@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { File }       from '@ionic-native/file';
-import { Platform }   from 'ionic-angular';
+import { Injectable, OnInit } from '@angular/core';
+import { File }               from '@ionic-native/file';
+import { Platform }           from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 
@@ -14,7 +14,7 @@ import { LoggerProvider } from '../logger/logger';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class MaskProvider {
+export class MaskProvider implements OnInit {
 
   private masks: Mask[] = [
     {name: "mask 1", yellow: 1, orange: 2, red: 3, purple: 4, brown: 5},
@@ -25,6 +25,10 @@ export class MaskProvider {
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks.json";
 
   constructor(public platform: Platform, private file: File, private logger: LoggerProvider) { }
+
+  ngOnInit(): void {
+    this.getMasks();
+  }
 
   getMasks(): Mask[] {
     this.platform.ready().then(
