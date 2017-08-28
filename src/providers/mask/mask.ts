@@ -30,11 +30,23 @@ export class MaskProvider {
     this.getMasks();
   }
 
-  getMasks(): Mask[] {
-    this.platform.ready().then(
-      () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME).then((masks) => this.masks = JSON.parse(masks)).catch(err => this.saveMasks(this.masks))
+  getMasks(): Promise<Mask[]> {
+    return this.platform.ready().then(
+      () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME)
+              .then((masks) => {
+                console.log("got masks ok in mask service");
+                this.masks = JSON.parse(masks);
+                return this.masks;
+              })
+              .catch(err => {
+                console.log("couldn't get masks in mask service, initialising...");
+                this.saveMasks(this.masks);
+                return this.masks;
+              })
     );
+  }
 
+  getInitialMasks(): Mask[] {
     return this.masks;
   }
 

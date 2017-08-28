@@ -1,4 +1,4 @@
-import { Component }                      from '@angular/core';
+import { Component, OnInit }              from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 
 import { Mask } from '../../app/mask';
@@ -10,19 +10,57 @@ import { LoggerProvider } from '../../providers/logger/logger';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   deleteDisabled: boolean = true;
 
-  private masks: Mask[] = this.maskService.getMasks();
+  private masks: Mask[] = this.maskService.getInitialMasks();
   private currentMask: Mask = this.masks[0];
 
-  remaining: number = this.maskService.calculateRemaining(this.currentMask);
+  remaining: number;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider, public logger: LoggerProvider) {
-    if (this.masks.length > 1) {
-      this.deleteDisabled = false;
-    }
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider, public logger: LoggerProvider) { }
+
+  ngOnInit(): void {
+    this.maskService.getMasks()
+      .then(masks => {
+        console.log("got masks ok in home");
+        console.log(masks);
+        this.masks = masks;
+      })
+      .then(() => {
+        if (this.masks.length > 1) {
+          this.deleteDisabled = false;
+        }
+        console.log("deleteDisabled: ", this.deleteDisabled);
+      })
+      .then(() => {
+        this.currentMask = this.masks[0];
+        console.log("currentMask: ", this.currentMask);
+      })
+      .then(() => {
+        this.remaining = this.maskService.calculateRemaining(this.currentMask);
+        console.log("remaining: ", this.remaining);
+      })
+      .then(() => {
+        this.masks.push(new Mask());
+        this.update();
+        this.masks.pop();
+        this.update();
+      })
+      .catch(err => {
+        console.log("didn't get masks ok in home");
+        this.masks = this.maskService.getInitialMasks();
+      });
+
+    console.log("Masks:", this.masks);
+
+    // if (this.masks.length > 1) {
+    //   this.deleteDisabled = false;
+    // }
+    //
+    // this.currentMask = this.masks[0];
+    // this.remaining = this.maskService.calculateRemaining(this.currentMask);
   }
 
   incrementYellow(): void {
