@@ -1,4 +1,4 @@
-import { Component }                      from '@angular/core';
+import { Component, OnInit }              from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 
 import { Mask } from '../../app/mask';
@@ -10,7 +10,7 @@ import { LoggerProvider } from '../../providers/logger/logger';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   deleteDisabled: boolean = true;
 
@@ -19,7 +19,11 @@ export class HomePage {
 
   remaining: number = this.maskService.calculateRemaining(this.currentMask);
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider, public logger: LoggerProvider) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider, public logger: LoggerProvider) { }
+
+  ngOnInit(): void {
+    this.masks = this.maskService.getMasks();
+    
     if (this.masks.length > 1) {
       this.deleteDisabled = false;
     }
