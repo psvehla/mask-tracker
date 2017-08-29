@@ -43,24 +43,31 @@ export class HomePage implements OnInit {
         console.log("remaining: ", this.remaining);
       })
       .then(() => {
+        // this is a hack to 'wake up' the binding on the drop-down
+        // I found that the page was getting painted before the data could be read from storage, so I had to initialise masks and currentMask to something. However, when the data was read,
+        // the dropdown wasn't getting updated, even though masks was. I found adding an item here gets the binding going, with the dropdown containing the array in storage, plus the extra
+        // item I've just added. I don't like it, but I can't figure out anything better for the moment.
         this.masks.push(new Mask());
-        this.update();
-        this.masks.pop();
         this.update();
       })
       .catch(err => {
         console.log("didn't get masks ok in home");
         this.masks = this.maskService.getInitialMasks();
       });
+  }
 
-    console.log("Masks:", this.masks);
+  // A hack above adds new masks to the masks list to wake up the binding of the dropdown. This deletes any unused new masks, to avoid a buildup of these new masks.
+  pruneNewMasks(): void {
+    if (this.masks.length > 1) {
+      let aNewMask: string = JSON.stringify(new Mask());
+      let isANewMask: (mask: Mask) => boolean = function(mask: Mask): boolean { return JSON.stringify(mask) !== aNewMask; }
+      this.masks = this.masks.filter(isANewMask);
+    }
 
-    // if (this.masks.length > 1) {
-    //   this.deleteDisabled = false;
-    // }
-    //
-    // this.currentMask = this.masks[0];
-    // this.remaining = this.maskService.calculateRemaining(this.currentMask);
+    if (this.masks.length < 1) {
+      this.masks.push(new Mask());
+      this.currentMask = this.masks[0];
+    }
   }
 
   incrementYellow(): void {
@@ -177,6 +184,7 @@ export class HomePage implements OnInit {
   }
 
   private update(): void {
+    this.pruneNewMasks();
     this.remaining = this.maskService.calculateRemaining(this.currentMask);
 
     if (this.masks.length > 1) {

@@ -16,11 +16,7 @@ import { LoggerProvider } from '../logger/logger';
 @Injectable()
 export class MaskProvider {
 
-  private masks: Mask[] = [
-    {name: "mask 1", yellow: 1, orange: 2, red: 3, purple: 4, brown: 5},
-    {name: "mask 2", yellow: 6, orange: 7, red: 8, purple: 9, brown: 10},
-    {name: "mask 3", yellow: 11, orange: 12, red: 13, purple: 14, brown: 15}
-  ];
+  private masks: Mask[] = [ new Mask() ];
 
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks.json";
 
@@ -55,7 +51,6 @@ export class MaskProvider {
 
     if (this.file.externalDataDirectory) {
       this.logger.log(this.file.externalDataDirectory);
-      // this.platform.ready().then(() => this.file.writeFile(this.file.dataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err)));
       this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err));
     }
     else {
