@@ -45,8 +45,6 @@ export class HomePage implements OnInit {
       .then(() => {
         this.masks.push(new Mask());
         this.update();
-        this.masks.pop();
-        this.update();
       })
       .catch(err => {
         console.log("didn't get masks ok in home");
