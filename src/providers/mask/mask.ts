@@ -21,8 +21,6 @@ export class MaskProvider {
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks.json";
 
   constructor(public platform: Platform, private file: File, private logger: LoggerProvider) {
-    console.log("initialised MaskProvider");
-    this.logger.log("initialised MaskProvider");
     this.getMasks();
   }
 
@@ -30,12 +28,11 @@ export class MaskProvider {
     return this.platform.ready().then(
       () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME)
               .then((masks) => {
-                console.log("got masks ok in mask service");
                 this.masks = JSON.parse(masks);
                 return this.masks;
               })
               .catch(err => {
-                console.log("couldn't get masks in mask service, initialising...");
+                console.log("Couldn't get masks in mask service, initialising...");
                 this.saveMasks(this.masks);
                 return this.masks;
               })
@@ -47,14 +44,12 @@ export class MaskProvider {
   }
 
   saveMasks(masks: Mask[]): void {
-    this.logger.log('saveMasks() called');
-
     if (this.file.externalDataDirectory) {
       this.logger.log(this.file.externalDataDirectory);
       this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err));
     }
     else {
-      this.logger.log("can't access storage, create an alert here")
+      this.logger.log("Can't access storage, create an alert here!")
     }
   }
 
