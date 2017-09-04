@@ -9,12 +9,15 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LoggerProvider {
 
+  private loggingEnabled: boolean = true;
   messages: string[] = [];
 
   constructor() {
   }
 
   log(message: string): void {
-    this.messages.push(message);
+    if (this.loggingEnabled) {
+      this.messages.push(message);
+    }
   }
 }

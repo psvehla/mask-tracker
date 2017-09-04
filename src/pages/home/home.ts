@@ -24,29 +24,24 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.maskService.getMasks()
       .then(masks => {
-        console.log("got masks ok in home");
-        console.log(masks);
         this.masks = masks;
       })
       .then(() => {
         if (this.masks.length > 1) {
           this.deleteDisabled = false;
         }
-        console.log("deleteDisabled: ", this.deleteDisabled);
       })
       .then(() => {
         this.currentMask = this.masks[0];
-        console.log("currentMask: ", this.currentMask);
       })
       .then(() => {
         this.remaining = this.maskService.calculateRemaining(this.currentMask);
-        console.log("remaining: ", this.remaining);
       })
       .then(() => {
         // this is a hack to 'wake up' the binding on the drop-down
         // I found that the page was getting painted before the data could be read from storage, so I had to initialise masks and currentMask to something. However, when the data was read,
-        // the dropdown wasn't getting updated, even though masks was. I found adding an item here gets the binding going, with the dropdown containing the array in storage, plus the extra
-        // item I've just added. I don't like it, but I can't figure out anything better for the moment.
+        // the dropdown wasn't getting updated, even though masks was. I found adding an item here gets the binding going, with the dropdown being updated to the array in storage, plus the extra
+        // item I've just added. I don't like it, but I can't figure out anything better for the moment. And the UX works in a way that I'm happy with.
         this.masks.push(new Mask());
         this.update();
       })
@@ -56,7 +51,7 @@ export class HomePage implements OnInit {
       });
   }
 
-  // A hack above adds new masks to the masks list to wake up the binding of the dropdown. This deletes any unused new masks, to avoid a buildup of these new masks.
+  // A hack above adds new masks to the masks list to 'wake up' the binding of the dropdown. This deletes any unused new masks, to avoid a buildup of these new masks.
   pruneNewMasks(): void {
     if (this.masks.length > 1) {
       let aNewMask: string = JSON.stringify(new Mask());
@@ -64,6 +59,7 @@ export class HomePage implements OnInit {
       this.masks = this.masks.filter(isANewMask);
     }
 
+    // If we've deleted all the masks, we'll add one here.
     if (this.masks.length < 1) {
       this.masks.push(new Mask());
       this.currentMask = this.masks[0];
