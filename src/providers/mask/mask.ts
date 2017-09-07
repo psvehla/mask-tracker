@@ -20,9 +20,7 @@ export class MaskProvider {
 
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks.json";
 
-  constructor(public platform: Platform, private alertCtrl: AlertController, private file: File, private logger: LoggerProvider) {
-    this.getMasks();
-  }
+  constructor(public platform: Platform, private alertCtrl: AlertController, private file: File, private logger: LoggerProvider) { }
 
   getMasks(): Promise<Mask[]> {
     return this.platform.ready().then(
