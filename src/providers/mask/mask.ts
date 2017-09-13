@@ -18,6 +18,8 @@ export class MaskProvider {
 
   private masks: Mask[] = [ new Mask() ];
 
+  private noStorageAlertShown: boolean = false;
+
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks.json";
 
   constructor(public platform: Platform, private alertCtrl: AlertController, private file: File, private logger: LoggerProvider) { }
@@ -49,12 +51,15 @@ export class MaskProvider {
     else {
       this.logger.log("Can't access storage.")
 
-      let alert = this.alertCtrl.create({
-        title: "Cannot access local storage.",
-        subTitle: "Any changes you make cannot be saved.",
-        buttons: ['dismiss']
-      });
-      alert.present();
+      if (!this.noStorageAlertShown) {
+        let alert = this.alertCtrl.create({
+          title: "Cannot access local storage.",
+          subTitle: "Any changes you make cannot be saved.",
+          buttons: ['dismiss']
+        });
+        alert.present();
+        this.noStorageAlertShown = true;
+      }
     }
   }
 
