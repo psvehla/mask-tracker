@@ -9,7 +9,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LoggerProvider {
 
-  private loggingEnabled: boolean = true;
+  // Turn screen loggin on and off here.
+  private loggingEnabled: boolean = false;
   messages: string[] = [];
 
   constructor() {
