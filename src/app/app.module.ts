@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen }                             from '@ionic-native/splash-screen';
 import { StatusBar }                                from '@ionic-native/status-bar';
 import { File }                                     from '@ionic-native/file';
+import { Vibration }                                from '@ionic-native/vibration';
 
 import { MyApp }        from './app.component';
 import { HomePage }     from '../pages/home/home';
@@ -28,6 +29,7 @@ import { LoggerProvider } from '../providers/logger/logger';
     StatusBar,
     SplashScreen,
     File,
+    Vibration,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MaskProvider,
     LoggerProvider
