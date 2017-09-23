@@ -1,5 +1,6 @@
 import { Component, OnInit }              from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
+import { Vibration }                      from '@ionic-native/vibration';
 
 import { Mask } from '../../app/mask';
 
@@ -12,6 +13,11 @@ import { LoggerProvider } from '../../providers/logger/logger';
 })
 export class HomePage implements OnInit {
 
+  decrementYellowDisabled: boolean = true;
+  decrementOrangeDisabled: boolean = true;
+  decrementRedDisabled: boolean = true;
+  decrementPurpleDisabled: boolean = true;
+  decrementBrownDisabled: boolean = true;
   deleteDisabled: boolean = true;
 
   private masks: Mask[] = this.maskService.getInitialMasks();
@@ -19,7 +25,7 @@ export class HomePage implements OnInit {
 
   remaining: number;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public maskService: MaskProvider, public logger: LoggerProvider) { }
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private vibe: Vibration, public maskService: MaskProvider, public logger: LoggerProvider) { }
 
   ngOnInit(): void {
     this.maskService.getMasks()
@@ -66,63 +72,97 @@ export class HomePage implements OnInit {
     }
   }
 
+  private bump(): void {
+    this.vibe.vibrate(50);
+  }
+
   incrementYellow(): void {
+    this.bump();
     this.currentMask.yellow++;
+    this.decrementYellowDisabled = false;
     this.update();
   }
 
   decrementYellow(): void {
     if (this.currentMask.yellow > 0) {
+      this.bump();
       this.currentMask.yellow--;
       this.update();
+    }
+    if (this.currentMask.yellow <= 0) {
+      this.decrementYellowDisabled = true;
     }
   }
 
   incrementOrange(): void {
+    this.bump();
     this.currentMask.orange++;
+    this.decrementOrangeDisabled = false;
     this.update();
   }
 
   decrementOrange(): void {
     if (this.currentMask.orange > 0) {
+      this.bump();
       this.currentMask.orange--;
       this.update();
+    }
+    if (this.currentMask.orange <= 0) {
+      this.decrementOrangeDisabled = true;
     }
   }
 
   incrementRed(): void {
+    this.bump();
     this.currentMask.red++;
+    this.decrementRedDisabled = false;
     this.update();
   }
 
   decrementRed(): void {
     if (this.currentMask.red > 0) {
+      this.bump();
       this.currentMask.red--;
       this.update();
+    }
+    if (this.currentMask.red <= 0) {
+      this.decrementRedDisabled = true;
     }
   }
 
   incrementPurple(): void {
+    this.bump();
     this.currentMask.purple++;
+    this.decrementPurpleDisabled = false;
     this.update();
   }
 
   decrementPurple(): void {
     if (this.currentMask.purple > 0) {
+      this.bump();
       this.currentMask.purple--;
       this.update();
+    }
+    if (this.currentMask.purple <= 0) {
+      this.decrementPurpleDisabled = true;
     }
   }
 
   incrementBrown(): void {
+    this.bump();
     this.currentMask.brown++;
+    this.decrementBrownDisabled = false;
     this.update();
   }
 
   decrementBrown(): void {
     if (this.currentMask.brown > 0) {
+      this.bump();
       this.currentMask.brown--;
       this.update();
+    }
+    if (this.currentMask.brown <= 0) {
+      this.decrementBrownDisabled = true;
     }
   }
 
