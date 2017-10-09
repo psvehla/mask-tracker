@@ -6,11 +6,14 @@ import { StatusBar }                                from '@ionic-native/status-b
 import { File }                                     from '@ionic-native/file';
 import { Vibration }                                from '@ionic-native/vibration';
 
-import { MyApp }        from './app.component';
-import { HomePage }     from '../pages/home/home';
-import { MaskProvider } from '../providers/mask/mask';
+import { MyApp }          from './app.component';
+import { HomePage }       from '../pages/home/home';
+import { MaskProvider }   from '../providers/mask/mask';
 import { LoggerProvider } from '../providers/logger/logger';
 
+/**
+ * The AppModule.
+ */
 @NgModule({
   declarations: [
     MyApp,
