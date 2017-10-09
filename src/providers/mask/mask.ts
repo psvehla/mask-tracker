@@ -7,23 +7,41 @@ import 'rxjs/add/operator/map';
 import { Mask }           from '../../app/mask';
 import { LoggerProvider } from '../logger/logger';
 
-/*
-  Generated class for the MaskProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+/**
+ * A service for managing masks.
+ */
 @Injectable()
 export class MaskProvider {
 
+  /**
+   * The list of masks being managed.
+   * Initialised to a list containing one new mask, to allow the screen to paint before masks load from storage, and to allow for situations where masks cannot be loaded, such as
+   * when no storage is available, and first runs.
+   */
   private masks: Mask[] = [ new Mask() ];
 
+  /**
+   * If storage is not available, an alert is shown to the user informing them that any changes will not be saved.
+   * The alert is shown only once, which is managed with this property.
+   */
   private noStorageAlertShown: boolean = false;
 
+  /**
+   * The name of the file used to store mask data in local storage.
+   */
   private readonly MASKS_PERSISTENCE_FILENAME: string = "masks.json";
 
+  /**
+   * Inject dependencies.
+   */
   constructor(public platform: Platform, private alertCtrl: AlertController, private file: File, private logger: LoggerProvider) { }
 
+  /**
+   * Retrieve the masks being managed from local storage.
+   * If the file isn't there yet, save the Initialised list and return that.
+   *
+   * @returns {Promise<Mask[]>} A promise with the masks being managed.
+   */
   getMasks(): Promise<Mask[]> {
     return this.platform.ready().then(
       () => this.file.readAsText(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME)
@@ -39,14 +57,29 @@ export class MaskProvider {
     );
   }
 
+  /**
+   * Gets a mask array now.
+   * Used to give pages something to work with while they wait for getMasks() to fulfil its promise.
+   * In a typical use case, this will usually be the Initialised Mask array.
+   *
+   * @returns {Mask[]} The masks being managed.
+   */
   getInitialMasks(): Mask[] {
     return this.masks;
   }
 
+  /**
+   * Saves masks data to local storage.
+   * Displays an alert if local storage cannot be accessed.
+   *
+   * @param {Mask[]} The masks being managed.
+   */
   saveMasks(masks: Mask[]): void {
     if (this.file.externalDataDirectory) {
       this.logger.log(this.file.externalDataDirectory);
-      this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0}).catch(err => this.logger.log(err));
+
+      this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0})
+        .catch(err => this.logger.log(err));
     }
     else {
       this.logger.log("Can't access storage.")
@@ -63,6 +96,13 @@ export class MaskProvider {
     }
   }
 
+  /**
+   * Calculates the life remaining in a mask, as a percentage.
+   * Currently only supports the VogMask formula (which also applies to Cambridge masks).
+   *
+   * @param {Mask} The mask to calculate the 'life remaining' for.
+   * @returns {number} The life remaining in a mask, as a percentage.
+   */
   calculateRemaining(mask: Mask): number {
     return Math.round(100 - (mask.yellow / 410 + mask.orange / 370 + mask.red / 210 + mask.purple / 160 + mask.brown / 80) * 100);
   }
