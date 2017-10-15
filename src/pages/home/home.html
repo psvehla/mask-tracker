@@ -9,7 +9,7 @@
 <ion-content padding>
   <div margin-bottom>
     <ion-item>
-      <ion-select [(ngModel)]="currentMask" interface="popover" [placeholder]="currentMask.name" (ngModelChange)="remaining = this.maskService.calculateRemaining(this.currentMask)">
+      <ion-select [(ngModel)]="currentMask" interface="popover" [placeholder]="currentMask.name" (ngModelChange)="update()">
         <ion-option *ngFor="let mask of masks" [value]="mask">{{mask.name}}</ion-option>
       </ion-select>
     </ion-item>

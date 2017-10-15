@@ -135,7 +135,6 @@ export class HomePage implements OnInit {
   incrementYellow(): void {
     this.bump();
     this.currentMask.yellow++;
-    this.decrementYellowDisabled = false;
     this.update();
   }
 
@@ -148,9 +147,6 @@ export class HomePage implements OnInit {
       this.currentMask.yellow--;
       this.update();
     }
-    if (this.currentMask.yellow <= 0) {
-      this.decrementYellowDisabled = true;
-    }
   }
 
   /**
@@ -159,7 +155,6 @@ export class HomePage implements OnInit {
   incrementOrange(): void {
     this.bump();
     this.currentMask.orange++;
-    this.decrementOrangeDisabled = false;
     this.update();
   }
 
@@ -172,9 +167,6 @@ export class HomePage implements OnInit {
       this.currentMask.orange--;
       this.update();
     }
-    if (this.currentMask.orange <= 0) {
-      this.decrementOrangeDisabled = true;
-    }
   }
 
   /**
@@ -183,7 +175,6 @@ export class HomePage implements OnInit {
   incrementRed(): void {
     this.bump();
     this.currentMask.red++;
-    this.decrementRedDisabled = false;
     this.update();
   }
 
@@ -196,9 +187,6 @@ export class HomePage implements OnInit {
       this.currentMask.red--;
       this.update();
     }
-    if (this.currentMask.red <= 0) {
-      this.decrementRedDisabled = true;
-    }
   }
 
   /**
@@ -207,7 +195,6 @@ export class HomePage implements OnInit {
   incrementPurple(): void {
     this.bump();
     this.currentMask.purple++;
-    this.decrementPurpleDisabled = false;
     this.update();
   }
 
@@ -220,9 +207,6 @@ export class HomePage implements OnInit {
       this.currentMask.purple--;
       this.update();
     }
-    if (this.currentMask.purple <= 0) {
-      this.decrementPurpleDisabled = true;
-    }
   }
 
   /**
@@ -231,7 +215,6 @@ export class HomePage implements OnInit {
   incrementBrown(): void {
     this.bump();
     this.currentMask.brown++;
-    this.decrementBrownDisabled = false;
     this.update();
   }
 
@@ -243,9 +226,6 @@ export class HomePage implements OnInit {
       this.bump();
       this.currentMask.brown--;
       this.update();
-    }
-    if (this.currentMask.brown <= 0) {
-      this.decrementBrownDisabled = true;
     }
   }
 
@@ -318,6 +298,13 @@ export class HomePage implements OnInit {
    */
   private update(): void {
     this.pruneNewMasks();
+
+    this.currentMask.yellow > 0 ? this.decrementYellowDisabled = false : this.decrementYellowDisabled = true;
+    this.currentMask.orange > 0 ? this.decrementOrangeDisabled = false : this.decrementOrangeDisabled = true;
+    this.currentMask.red > 0 ? this.decrementRedDisabled = false : this.decrementRedDisabled = true;
+    this.currentMask.purple > 0 ? this.decrementPurpleDisabled = false : this.decrementPurpleDisabled = true;
+    this.currentMask.brown > 0 ? this.decrementBrownDisabled = false : this.decrementBrownDisabled = true;
+
     this.remaining = this.maskService.calculateRemaining(this.currentMask);
 
     if (this.masks.length > 1) {
