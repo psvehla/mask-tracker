@@ -77,15 +77,7 @@ export class HomePage implements OnInit {
         this.masks = masks;
       })
       .then(() => {
-        if (this.masks.length > 1) {
-          this.deleteDisabled = false;
-        }
-      })
-      .then(() => {
         this.currentMask = this.masks[0];
-      })
-      .then(() => {
-        this.remaining = this.maskService.calculateRemaining(this.currentMask);
       })
       .then(() => {
         // this is a hack to 'wake up' the binding on the drop-down
