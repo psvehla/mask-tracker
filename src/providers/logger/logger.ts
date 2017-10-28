@@ -32,4 +32,13 @@ export class LoggerProvider {
       this.messages.push(message);
     }
   }
+
+  /**
+   * Reports whether or not logging is enabled.
+   *
+   * @return {boolean} Whether or not logging is enabled.
+   */
+  isLoggingEnabled(): boolean {
+    return this.loggingEnabled;
+  }
 }
