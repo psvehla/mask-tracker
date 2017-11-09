@@ -9,8 +9,7 @@ import { Injectable } from '@angular/core';
 export class LoggerProvider {
 
   /**
-   * Enables and disables logging.
-   * Turn screen logging on and off here.
+   * Whether or not screen logging has been enabled.
    */
   private loggingEnabled: boolean = false;
 
@@ -40,5 +39,12 @@ export class LoggerProvider {
    */
   isLoggingEnabled(): boolean {
     return this.loggingEnabled;
+  }
+
+  /**
+   * Enables screen logging.
+   */
+  enableLogging(): void {
+    this.loggingEnabled = true;
   }
 }
