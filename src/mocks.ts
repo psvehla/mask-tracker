@@ -61,3 +61,15 @@ export class MenuMock {
     });
   }
 }
+
+export class StatusBarMock {
+
+}
+
+export class SplashScreenMock {
+
+}
+
+export class MaskProviderMock {
+
+}
