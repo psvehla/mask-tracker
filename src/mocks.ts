@@ -1,3 +1,5 @@
+import { Mask } from './app/mask';
+
 export class ConfigMock {
 
   public get(): any {
@@ -70,6 +72,20 @@ export class SplashScreenMock {
 
 }
 
+export class NavControllerMock {
+
+}
+
+export class VibrationMock {
+
+}
+
 export class MaskProviderMock {
+  getInitialMasks(): Mask[] {
+    return [ new Mask() ];
+  }
+}
+
+export class LoggerProviderMock {
 
 }
