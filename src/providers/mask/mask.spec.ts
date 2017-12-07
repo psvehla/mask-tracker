@@ -2,7 +2,9 @@ import { MaskProvider } from './mask';
 
 let maskProvider = null;
 
-describe('Logger Service', () => {
+describe('Mask Service', () => {
+
+  // this one will need a testbed, but not an async one, since it doesn't use external templates
 
   // beforeEach(() => {
   //   maskProvider = new MaskProvider();

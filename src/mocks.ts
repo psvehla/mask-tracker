@@ -15,6 +15,10 @@ export class ConfigMock {
   }
 }
 
+export class AppMock {
+
+}
+
 export class FormMock {
   public register(): any {
     return true;
@@ -64,6 +68,10 @@ export class MenuMock {
   }
 }
 
+export class MenuControllerMock {
+
+}
+
 export class StatusBarMock {
 
 }
@@ -76,13 +84,32 @@ export class NavControllerMock {
 
 }
 
-export class VibrationMock {
+export class AlertControllerMock {
+}
 
+export class VibrationMock {
+  vibrate(time: number | Array<number>): void {
+    // do nothing
+  }
 }
 
 export class MaskProviderMock {
+  private masks: Mask[] = [ new Mask() ];
+
+  getMasks(): Promise<Mask[]> {
+    return Promise.resolve(this.masks);
+  }
+
   getInitialMasks(): Mask[] {
-    return [ new Mask() ];
+    return this.masks;
+  }
+
+  saveMasks(masks: Mask[]): void {
+    this.masks = masks;
+  }
+
+  calculateRemaining(mask: Mask): number {
+    return 100;
   }
 }
 

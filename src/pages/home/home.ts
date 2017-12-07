@@ -50,13 +50,13 @@ export class HomePage implements OnInit {
    * The masks being managed.
    * Initialised to a list with one fresh mask in it so that the page can paint while the masks load. Also a good starting point if there are no masks to load.
    */
-  private masks: Mask[] = this.maskService.getInitialMasks();
+  masks: Mask[] = this.maskService.getInitialMasks();
 
   /**
    * The current mask being displayed.
-   * Initialised to the first mask in the list. The code generally assumes and assures that there is at least 1 mask in the list.
+   * Initialised to the first mask in the list. The code generally assumes and ensures that there is at least 1 mask in the list.
    */
-  private currentMask: Mask = this.masks[0];
+  currentMask: Mask = this.masks[0];
 
   /**
    * The amount of life left in the mask being displayed. As a percentage.
@@ -91,6 +91,7 @@ export class HomePage implements OnInit {
       .catch(err => {
         console.log("There was a problem with reading mask data from local storage.");
         this.masks = this.maskService.getInitialMasks();
+        this.update();
       });
   }
 
@@ -232,7 +233,7 @@ export class HomePage implements OnInit {
   /**
    * Creates a dialog that allows the user to add a new mask.
    */
-  addMask(): void {
+  addMaskDialog(): void {
     let alert = this.alertCtrl.create({
       title: "Add Mask",
       inputs: [{
@@ -247,11 +248,7 @@ export class HomePage implements OnInit {
         {
           text: 'add',
           handler: data => {
-            let newMask: Mask = new Mask();
-            newMask.name = data.name;
-            this.masks.push(newMask);
-            this.currentMask = newMask;
-            this.update();
+            this.addMask(data.name);
           }
         }
       ]
@@ -260,9 +257,22 @@ export class HomePage implements OnInit {
   }
 
   /**
+   * Adds a mask to the list of masks being managed.
+   *
+   * @param {string} The name of the new mask.
+   */
+  addMask(maskName: string): void {
+    let newMask: Mask = new Mask();
+    newMask.name = maskName;
+    this.masks.push(newMask);
+    this.currentMask = newMask;
+    this.update();
+  }
+
+  /**
    * Creates a dialog that facilitates the deltion of masks.
    */
-  deleteMask(): void {
+  deleteMaskDialog(): void {
     let alert = this.alertCtrl.create({
       title: "Delete Mask",
       message: "Are you sure you want to delete the mask '" + this.currentMask.name + "'?",
@@ -274,14 +284,26 @@ export class HomePage implements OnInit {
         {
           text: 'ok',
           handler: () => {
-            this.masks.splice(this.masks.indexOf(this.currentMask), 1);
-            this.currentMask = this.masks[0];
-            this.update();
+            this.deleteMask();
           }
         }
       ]
     });
     alert.present();
+  }
+
+  /**
+   * Removes a mask from the list of masks being managed.
+   */
+  deleteMask(): void {
+    if (this.masks.length > 1) {
+      this.masks.splice(this.masks.indexOf(this.currentMask), 1);
+      this.currentMask = this.masks[0];
+      this.update();
+    }
+    else {
+      console.error("An attempt has been made to delete the last mask in the list of masks being managed. The view should prevent this from happening.");
+    }
   }
 
   /**
