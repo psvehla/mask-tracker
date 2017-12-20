@@ -52,14 +52,6 @@ export class NavMock {
   }
 }
 
-export class PlatformMock {
-  public ready(): any {
-    return new Promise((resolve: Function) => {
-      resolve();
-    });
-  }
-}
-
 export class MenuMock {
   public close(): any {
     return new Promise((resolve: Function) => {
@@ -80,11 +72,8 @@ export class SplashScreenMock {
 
 }
 
-export class NavControllerMock {
-
-}
-
 export class AlertControllerMock {
+
 }
 
 export class VibrationMock {
@@ -114,5 +103,25 @@ export class MaskProviderMock {
 }
 
 export class LoggerProviderMock {
+  log(message: string): void {
+    // do nothing
+  }
+}
 
+export interface IWriteOptions {
+    replace?: boolean;
+    append?: boolean;
+    truncate?: number;
+}
+
+export class FileMock {
+  public externalDataDirectory: string = "aDirectory";
+
+  readAsText(path: string, file: string): Promise<string> {
+    return Promise.resolve('a string');
+  }
+
+  writeFile(path: string, fileName: string, text: string | Blob | ArrayBuffer, options?: IWriteOptions): Promise<any> {
+    return Promise.resolve();
+  }
 }

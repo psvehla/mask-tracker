@@ -27,6 +27,8 @@ export class LoggerProvider {
    * @param {string} message The message to add to the log.
    */
   log(message: string): void {
+    console.debug(message);
+    
     if (this.loggingEnabled) {
       this.messages.push(message);
     }

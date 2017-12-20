@@ -3,12 +3,13 @@ import { By }                                                 from '@angular/pla
 import { DebugElement }                                       from '@angular/core';
 import { IonicModule, NavController, AlertController }        from 'ionic-angular';
 import { Vibration }                                          from '@ionic-native/vibration';
+import { NavControllerMock, AlertControllerMock }             from 'ionic-mocks';
 
-import { MyApp }                                                                                        from '../../app/app.component';
-import { HomePage }                                                                                     from './home';
-import { MaskProvider }                                                                                 from '../../providers/mask/mask';
-import { LoggerProvider }                                                                               from '../../providers/logger/logger';
-import { NavControllerMock, AlertControllerMock, VibrationMock, MaskProviderMock, LoggerProviderMock }  from '../../mocks';
+import { MyApp }                                                                    from '../../app/app.component';
+import { HomePage }                                                                 from './home';
+import { MaskProvider }                                                             from '../../providers/mask/mask';
+import { LoggerProvider }                                                           from '../../providers/logger/logger';
+import { VibrationMock, MaskProviderMock, LoggerProviderMock }                      from '../../mocks';
 
 let comp: HomePage;
 let fixture: ComponentFixture<HomePage>;
@@ -170,8 +171,8 @@ describe('Page: Home Page', () => {
             declarations: [MyApp, HomePage],
 
             providers: [
-              {provide: NavController, useClass: NavControllerMock},
-              {provide: AlertController, useClass: AlertControllerMock},
+              {provide: NavController, useFactory: () => NavControllerMock.instance()},
+              {provide: AlertController, useFactory: () => AlertControllerMock.instance()},
               {provide: Vibration, useClass: VibrationMock},
               {provide: MaskProvider, useClass: MaskProviderMock},
               {provide: LoggerProvider, useClass: LoggerProviderMock}
@@ -197,21 +198,6 @@ describe('Page: Home Page', () => {
     it('is created', () => {
         expect(fixture).toBeTruthy();
         expect(comp).toBeTruthy();
-    });
-
-    it('has decrement buttons disabled', () => {
-      expect(page.incrementYellowButton.nativeElement.disabled).toBeFalsy();
-      expect(page.decrementYellowButton.nativeElement.disabled).toBeFalsy();
-      expect(page.incrementOrangeButton.nativeElement.disabled).toBeFalsy();
-      expect(page.decrementOrangeButton.nativeElement.disabled).toBeFalsy();
-      expect(page.incrementRedButton.nativeElement.disabled).toBeFalsy();
-      expect(page.decrementRedButton.nativeElement.disabled).toBeFalsy();
-      expect(page.incrementPurpleButton.nativeElement.disabled).toBeFalsy();
-      expect(page.decrementPurpleButton.nativeElement.disabled).toBeFalsy();
-      expect(page.incrementBrownButton.nativeElement.disabled).toBeFalsy();
-      expect(page.decrementBrownButton.nativeElement.disabled).toBeFalsy();
-      expect(page.addMaskButton.nativeElement.disabled).toBeFalsy();
-      expect(page.deleteMaskButton.nativeElement.disabled).toBeFalsy();
     });
 
     it('has the correct initial state', () => {

@@ -1,8 +1,8 @@
 import { LoggerProvider } from './logger';
 
-let loggerProvider = null;
-
 describe('Logger Service', () => {
+
+  let loggerProvider = null;
 
   beforeEach(() => {
     loggerProvider = new LoggerProvider();
