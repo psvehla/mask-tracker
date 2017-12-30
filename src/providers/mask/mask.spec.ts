@@ -1,5 +1,4 @@
-import { TestBed, ComponentFixture, inject, fakeAsync, tick }      from '@angular/core/testing';
-import { DebugElement }                           from '@angular/core';
+import { TestBed, inject, fakeAsync, tick }      from '@angular/core/testing';
 import { File }                                   from '@ionic-native/file';
 import { IonicModule, Platform, AlertController } from 'ionic-angular';
 import { PlatformMock, AlertControllerMock  }     from 'ionic-mocks';
@@ -13,11 +12,6 @@ import { LoggerProvider } from '../logger/logger';
 import { FileMock, LoggerProviderMock }  from '../../mocks';
 
 describe('Mask Service', () => {
-
-  let comp:     MaskProvider;
-  let fixture:  ComponentFixture<MaskProvider>;
-  let de:       DebugElement;
-  let el:       HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -42,6 +36,22 @@ describe('Mask Service', () => {
     fakeAsync(() => {
       tick();
       expect(maskProvider.getMasks()).toEqual(Promise.resolve([ new Mask() ]));
+    });
+  }));
+
+  it("can get initial masks", inject([MaskProvider], (maskProvider) => {
+    fakeAsync(() => {
+      tick();
+      expect(maskProvider.getInitialMasks()).toEqual(Promise.resolve([ new Mask() ]));
+    });
+  }));
+
+  it("can save masks", inject([MaskProvider], (maskProvider) => {
+    fakeAsync(() => {
+      tick();
+      expect(maskProvider.saveMasks()).not.toThrow();
+      maskProvider.externalDataDirectory = null;
+      expect(maskProvider.saveMasks()).not.toThrow();
     });
   }));
 });
