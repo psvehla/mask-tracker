@@ -50,7 +50,7 @@ export class MaskProvider {
                 return this.masks;
               })
               .catch(err => {
-                console.log("Couldn't get masks in mask service, initialising...");
+                console.warn("Couldn't get masks in mask service, initialising...");
                 this.saveMasks(this.masks);
                 return this.masks;
               })
