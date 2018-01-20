@@ -50,7 +50,7 @@ export class MaskProvider {
                 return this.masks;
               })
               .catch(err => {
-                console.log("Couldn't get masks in mask service, initialising...");
+                console.warn("Couldn't get masks in mask service, initialising...");
                 this.saveMasks(this.masks);
                 return this.masks;
               })
@@ -79,20 +79,31 @@ export class MaskProvider {
       this.logger.log(this.file.externalDataDirectory);
 
       this.file.writeFile(this.file.externalDataDirectory, this.MASKS_PERSISTENCE_FILENAME, JSON.stringify(masks), {"replace": true, "append": false, "truncate": 0})
-        .catch(err => this.logger.log(err));
+        .catch(err => this.noLocalStorage(err));
     }
     else {
-      this.logger.log("Can't access storage.")
+      this.noLocalStorage("File.externalDataDirectory not found.");
+    }
+  }
 
-      if (!this.noStorageAlertShown) {
-        let alert = this.alertCtrl.create({
-          title: "Cannot access local storage.",
-          subTitle: "Any changes you make cannot be saved.",
-          buttons: ['dismiss']
-        });
-        alert.present();
-        this.noStorageAlertShown = true;
-      }
+  /**
+   * Handles the no local storage available situation.
+   * Pops up a dialog to the user letting them know that anything they do won't be saved.
+   *
+   * @param {any} The error causing the no local storage available situation.
+   */
+  private noLocalStorage(err: any): void {
+    this.logger.log("Can't access storage.");
+    this.logger.log(err);
+
+    if (!this.noStorageAlertShown) {
+      let alert = this.alertCtrl.create({
+        title: "Cannot access local storage.",
+        subTitle: "Any changes you make cannot be saved.",
+        buttons: ['dismiss']
+      });
+      alert.present();
+      this.noStorageAlertShown = true;
     }
   }
 

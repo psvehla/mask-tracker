@@ -17,7 +17,7 @@
   <ion-grid>
     <ion-row>
       <ion-col align-self-center>
-        <h2 style="color:yellow">51-100</h2>
+        <h2 style="color:yellow" (click)="showYellowDescription()">51-100</h2>
       </ion-col>
       <ion-col align-self-center>
         <button ion-button large (click)="incrementYellow()">+</button>
@@ -31,7 +31,7 @@
     </ion-row>
     <ion-row>
       <ion-col align-self-center>
-        <h2 style="color:orange">101-150</h2>
+        <h2 style="color:orange" (click)="showOrangeDescription()">101-150</h2>
       </ion-col>
       <ion-col align-self-center>
         <button ion-button large (click)="incrementOrange()">+</button>
@@ -45,7 +45,7 @@
     </ion-row>
     <ion-row>
       <ion-col align-self-center>
-        <h2 style="color:red">151-200</h2>
+        <h2 style="color:red" (click)="showRedDescription()">151-200</h2>
       </ion-col>
       <ion-col align-self-center>
         <button ion-button large (click)="incrementRed()">+</button>
@@ -59,7 +59,7 @@
     </ion-row>
     <ion-row>
       <ion-col align-self-center>
-        <h2 style="color:purple">201-300</h2>
+        <h2 style="color:purple" (click)="showPurpleDescription()">201-300</h2>
       </ion-col>
       <ion-col align-self-center>
         <button ion-button large (click)="incrementPurple()">+</button>
@@ -73,7 +73,7 @@
     </ion-row>
     <ion-row>
       <ion-col align-self-center>
-        <h2 style="color:brown">300+</h2>
+        <h2 style="color:brown" (click)="showBrownDescription()">300+</h2>
       </ion-col>
       <ion-col align-self-center>
         <button ion-button large (click)="incrementBrown()">+</button>
@@ -92,10 +92,10 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button (click)="addMask()">add mask</button>
+        <button ion-button (click)="addMaskDialog()">add mask</button>
       </ion-col>
       <ion-col>
-        <button ion-button color="danger" [disabled]="deleteDisabled" (click)="deleteMask()">delete</button>
+        <button ion-button color="danger" [disabled]="deleteDisabled" (click)="deleteMaskDialog()">delete</button>
       </ion-col>
     </ion-row>
   </ion-grid>
