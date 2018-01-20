@@ -115,6 +115,71 @@ export class HomePage implements OnInit {
   }
 
   /**
+   * Shows a popup describing the yellow pollution range.
+   **/
+  showYellowDescription(): void {
+    let alert = this.alertCtrl.create({
+      title: "51-100 (Yellow)",
+      subTitle: "Air quality is acceptable. For some pollutants there may be a moderate health concern for a very small number of people.",
+      buttons: ['dismiss']
+    });
+
+    alert.present();
+  }
+
+  /**
+   * Shows a popup describing the orange pollution range.
+   **/
+  showOrangeDescription(): void {
+    let alert = this.alertCtrl.create({
+      title: "101-150 (Orange)",
+      subTitle: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
+      buttons: ['dismiss']
+    });
+
+    alert.present();
+  }
+
+  /**
+   * Shows a popup describing the red pollution range.
+   **/
+  showRedDescription(): void {
+    let alert = this.alertCtrl.create({
+      title: "151-200 (Red)",
+      subTitle: "Everyone may begin to experience some adverse health effects, members of sensitive groups may experience more serious effects.",
+      buttons: ['dismiss']
+    });
+
+    alert.present();
+  }
+
+  /**
+   * Shows a popup describing the purple pollution range.
+   **/
+  showPurpleDescription(): void {
+    let alert = this.alertCtrl.create({
+      title: "201-300 (Purple)",
+      subTitle: "This would trigger a health alert signifying that everyone may experience more serious health effects.",
+      buttons: ['dismiss']
+    });
+
+    alert.present();
+  }
+
+  /**
+   * Shows a popup describing the brown pollution range.
+   **/
+  showBrownDescription(): void {
+    let alert = this.alertCtrl.create({
+      title: "300+ (Brown)",
+      subTitle: "Health alert: everyone may experience more serious health effects.",
+      buttons: ['dismiss']
+    });
+
+    alert.present();
+  }
+
+  /**
    * Provides haptic feedback to the user that a button has been pressed.
    */
   private bump(): void {
