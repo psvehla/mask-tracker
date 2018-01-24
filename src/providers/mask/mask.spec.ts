@@ -33,9 +33,16 @@ describe('Mask Service', () => {
   });
 
   it("can get masks", fakeAsync(inject([MaskProvider], (maskProvider) => {
-    let masks:Promise<Mask[]> = maskProvider.getMasks();
+    let masks: Mask[] = null;
+    let masksWithOneNewMask: Mask[] = null;
+
+    let masksPromise: Promise<Mask[]> = maskProvider.getMasks();
+    let masksWithOneNewMaskPromise: Promise<Mask[]> = Promise.resolve([ new Mask() ]);
+    
     tick();
-    expect(masks).toEqual(Promise.resolve([ new Mask() ]));
+    masksPromise.then((value) => {masks = value});
+    masksWithOneNewMaskPromise.then((value) => {masksWithOneNewMask = value});
+    expect(masks).toEqual(masksWithOneNewMask);
   })));
 
   it("can get initial masks", inject([MaskProvider], (maskProvider) => {
