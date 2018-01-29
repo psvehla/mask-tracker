@@ -77,8 +77,10 @@ export class AlertControllerMock {
 }
 
 export class VibrationMock {
-  vibrate(time: number | Array<number>): void {
-    // do nothing
+  public static instance(): any {
+    let instance = jasmine.createSpyObj('Vibration', ['vibrate']);
+    instance.vibrate.and.stub();
+    return instance;
   }
 }
 
