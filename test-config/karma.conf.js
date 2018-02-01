@@ -58,5 +58,9 @@ module.exports = function(config) {
     singleRun: false
   };
 
+  if (process.env.TRAVIS) {
+    _config.singleRun = true;
+  }
+
   config.set(_config);
 };
