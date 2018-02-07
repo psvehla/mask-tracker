@@ -1,3 +1,5 @@
+import { element, by, browser, protractor } from 'protractor';
+
 import { Page } from './app.po';
 
 describe('App', () => {
@@ -19,7 +21,10 @@ describe('App', () => {
     });
 
     it("should display a local storage warning popup when none is available", () => {
-      // TODO
+      let ec = protractor.ExpectedConditions, dialogTitle = element(by.id('alert-hdr-0'));
+      browser.wait(ec.presenceOf(dialogTitle), 5000);
+      dialogTitle.getText().then((text) => expect(text).toEqual("Cannot access local storage."));
+      element(by.id('alert-subhdr-0')).getText().then((text) => expect(text).toEqual("Any changes you make cannot be saved."));
     });
 
     it("should have a dropdown set to 'Mask 1'", () => {
