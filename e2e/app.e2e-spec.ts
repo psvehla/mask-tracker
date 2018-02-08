@@ -11,7 +11,6 @@ describe('App', () => {
 
   describe('default screen', () => {
     beforeEach(() => {
-      browser.waitForAngularEnabled(false);
       page.navigateTo('/');
     });
 
