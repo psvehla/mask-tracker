@@ -15,6 +15,7 @@ before_script:
   - npm prune
   - "sudo chown root /usr/lib/chromium-browser/chrome-sandbox"
   - "sudo chmod 4755 /usr/lib/chromium-browser/chrome-sandbox"
+  - npm run start
 after_success:
   - npm run semantic-release
 branches:
