@@ -15,7 +15,8 @@
     "test-coverage": "karma start ./test-config/karma.conf.js --coverage",
     "e2e": "npm run e2e-update && npm run e2e-test",
     "e2e-test": "protractor ./test-config/protractor.conf.js",
-    "e2e-update": "webdriver-manager update --standalone false --gecko false"
+    "e2e-update": "webdriver-manager update --standalone false --gecko false",
+    "ci": "npm run test-ci && npm run e2e"
   },
   "dependencies": {
     "@angular-cli/ast-tools": "^1.0.16",
