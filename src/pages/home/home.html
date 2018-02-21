@@ -73,13 +73,27 @@
     </ion-row>
     <ion-row>
       <ion-col align-self-center>
-        <h2 style="color:brown" (click)="showBrownDescription()">300+</h2>
+        <h2 style="color:brown" (click)="showBrownDescription()">300-500</h2>
       </ion-col>
       <ion-col align-self-center>
         <button ion-button large (click)="incrementBrown()">+</button>
       </ion-col>
       <ion-col align-self-center>
         <h3 style="color:brown">{{currentMask.brown}}</h3>
+      </ion-col>
+      <ion-col align-self-center col-auto>
+        <button ion-button small [disabled]="decrementBrownDisabled" (click)="decrementBrown()">-</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center>
+        <h2 style="color:black" (click)="showBrownDescription()">500+</h2>
+      </ion-col>
+      <ion-col align-self-center>
+        <button ion-button large (click)="incrementBrown()">+</button>
+      </ion-col>
+      <ion-col align-self-center>
+        <h3 style="color:black">{{currentMask.brown}}</h3>
       </ion-col>
       <ion-col align-self-center col-auto>
         <button ion-button small [disabled]="decrementBrownDisabled" (click)="decrementBrown()">-</button>
