@@ -173,7 +173,7 @@ describe('Page: Home Page', () => {
             providers: [
               {provide: NavController, useFactory: () => NavControllerMock.instance()},
               {provide: AlertController, useFactory: () => AlertControllerMock.instance()},
-              {provide: Vibration, useClass: VibrationMock},
+              {provide: Vibration, useFactory: () => VibrationMock.instance()},
               {provide: MaskProvider, useClass: MaskProviderMock},
               {provide: LoggerProvider, useClass: LoggerProviderMock}
             ],

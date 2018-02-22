@@ -2,11 +2,12 @@ import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { IonicModule }                      from 'ionic-angular';
 import { StatusBar }                        from '@ionic-native/status-bar';
 import { SplashScreen }                     from '@ionic-native/splash-screen';
+import { StatusBarMock, SplashScreenMock }  from 'ionic-mocks';
 
 import { MyApp }                                              from './app.component';
 import { HomePage }                                           from '../pages/home/home';
 import { MaskProvider }                                       from '../providers/mask/mask';
-import { StatusBarMock, SplashScreenMock, MaskProviderMock }  from '../mocks';
+import { MaskProviderMock }                                   from '../mocks';
 
 let comp: MyApp;
 let fixture: ComponentFixture<MyApp>;
