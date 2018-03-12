@@ -8,6 +8,7 @@ import { Vibration }                                from '@ionic-native/vibratio
 
 import { MyApp }          from './app.component';
 import { HomePage }       from '../pages/home/home';
+import { AddMaskPage }    from '../pages/add-mask/add-mask';
 import { MaskProvider }   from '../providers/mask/mask';
 import { LoggerProvider } from '../providers/logger/logger';
 
@@ -17,7 +18,8 @@ import { LoggerProvider } from '../providers/logger/logger';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    AddMaskPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { LoggerProvider } from '../providers/logger/logger';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    AddMaskPage
   ],
   providers: [
     StatusBar,
