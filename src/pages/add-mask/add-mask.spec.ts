@@ -1,9 +1,9 @@
-import { TestBed, ComponentFixture, async, fakeAsync, tick }  from '@angular/core/testing';
-import { By }                                                 from '@angular/platform-browser';
-import { DebugElement }                                       from '@angular/core';
-import { IonicModule, NavController, AlertController }        from 'ionic-angular';
-import { Vibration }                                          from '@ionic-native/vibration';
-import { NavControllerMock, AlertControllerMock }             from 'ionic-mocks';
+import { TestBed, ComponentFixture, async, fakeAsync, tick }                          from '@angular/core/testing';
+import { By }                                                                         from '@angular/platform-browser';
+import { DebugElement }                                                               from '@angular/core';
+import { IonicModule, NavController, NavParams, ViewController, AlertController }     from 'ionic-angular';
+import { Vibration }                                                                  from '@ionic-native/vibration';
+import { NavControllerMock, NavParamsMock, ViewControllerMock, AlertControllerMock }  from 'ionic-mocks';
 
 import { MyApp }                                                                    from '../../app/app.component';
 import { AddMaskPage }                                                              from '../add-mask/add-mask';
@@ -172,10 +172,9 @@ describe('Page: Add Mask Page', () => {
 
             providers: [
               {provide: NavController, useFactory: () => NavControllerMock.instance()},
-              {provide: AlertController, useFactory: () => AlertControllerMock.instance()},
-              {provide: Vibration, useFactory: () => VibrationMock.instance()},
-              {provide: MaskProvider, useClass: MaskProviderMock},
-              {provide: LoggerProvider, useClass: LoggerProviderMock}
+              {provide: NavParams, useFactory: () => NavParamsMock.instance()},
+              {provide: ViewController, useFactory: () => ViewControllerMock.instance()},
+              {provide: AlertController, useFactory: () => AlertControllerMock.instance()}
             ],
 
             imports: [
