@@ -1,11 +1,13 @@
-import { Component, OnInit }              from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
-import { Vibration }                      from '@ionic-native/vibration';
+import { Component, OnInit }                                from '@angular/core';
+import { NavController, AlertController, ModalController }  from 'ionic-angular';
+import { Vibration }                                        from '@ionic-native/vibration';
 
 import { Mask } from '../../app/mask';
 
 import { MaskProvider }   from '../../providers/mask/mask';
 import { LoggerProvider } from '../../providers/logger/logger';
+
+import { AddMaskPage } from '../add-mask/add-mask';
 
 /**
  * The appliction home page, which is its only page.
@@ -66,7 +68,9 @@ export class HomePage implements OnInit {
   /**
    * Inject dependencies.
    */
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private vibe: Vibration, public maskService: MaskProvider, public logger: LoggerProvider) { }
+  constructor(
+    public navCtrl: NavController, public alertCtrl: AlertController, public modalController: ModalController, private vibe: Vibration, public maskService: MaskProvider, public logger: LoggerProvider
+  ) { }
 
   /**
    * Initialise the page by loading up the masks from local storage.
@@ -299,26 +303,15 @@ export class HomePage implements OnInit {
    * Creates a dialog that allows the user to add a new mask.
    */
   addMaskDialog(): void {
-    let alert = this.alertCtrl.create({
-      title: "Add Mask",
-      inputs: [{
-        name: 'name',
-        placeholder: 'another mask'
-      }],
-      buttons: [
-        {
-          text: 'cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'add',
-          handler: data => {
-            this.addMask(data.name);
-          }
-        }
-      ]
+    let modal = this.modalController.create(AddMaskPage);
+
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.addMask(data)
+      }
     });
-    alert.present();
+
+    modal.present();
   }
 
   /**
