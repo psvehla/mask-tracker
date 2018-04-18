@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
 /**
  * A dialog that allows users to add masks.
  */
-@IonicPage()
 @Component({
   selector: 'page-add-mask',
   templateUrl: 'add-mask.html',
